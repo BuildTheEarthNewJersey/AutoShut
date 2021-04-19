@@ -1,0 +1,6 @@
+name: AutoShut
+version: ${project.version}
+main: autoshut.autoshut.AutoShut
+authors: [ CallOfTheDragon ]
+description: A plugin designed to automatically shutdown a server at specific times
+website: https://buildtheearth.net/bte-new-jersey

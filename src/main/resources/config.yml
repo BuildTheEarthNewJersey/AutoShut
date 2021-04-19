@@ -1,0 +1,7 @@
+shutdown-time: "03:30:00"
+warning-seconds:
+  - "300"
+  - "60"
+  - "5"
+debug: false
+player-announcements: true
