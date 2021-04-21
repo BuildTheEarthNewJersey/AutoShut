@@ -4,3 +4,7 @@ main: autoshut.autoshut.AutoShut
 authors: [ CallOfTheDragon ]
 description: A plugin designed to automatically shutdown a server at specific times
 website: https://buildtheearth.net/bte-new-jersey
+commands:
+  getTime:
+    description: Returns the current time.
+    usage: /<command>

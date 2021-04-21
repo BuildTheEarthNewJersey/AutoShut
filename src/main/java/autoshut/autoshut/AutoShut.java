@@ -22,6 +22,11 @@ public final class AutoShut extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         this.saveDefaultConfig();
+
+        //instantiate commands
+        getCommand("getTime").setExecutor(new GetTime());
+
+        //Repeating Tasks
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
             @Override
             public void run() {
