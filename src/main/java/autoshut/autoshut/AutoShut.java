@@ -63,7 +63,7 @@ public final class AutoShut extends JavaPlugin {
                 }
             }
         }, 0L, 1*20); //repeats every second
-
+        //Bababooey
         if (debug)
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
                 @Override
