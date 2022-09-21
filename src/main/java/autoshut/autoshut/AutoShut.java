@@ -15,6 +15,21 @@ public final class AutoShut extends JavaPlugin {
     private boolean playerAnnouncements;
     private boolean debug;
     private LocalTime shutdown;
+    /*
+    Instead of using localTime, we can attempt to use a instantiate using a specific timezone
+        by getting the date, and then setting the time to EST
+
+    Pulled from S.O.
+
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // GMT-5
+        df.setTimeZone(TimeZone.getTimeZone("GMT-5:00"));
+        String strDate = df.format(date);
+        System.out.println("Date and time in GMT-5: " + strDate);
+
+    */
     private List<String> warningSeconds;
 
     @Override
@@ -63,7 +78,7 @@ public final class AutoShut extends JavaPlugin {
                 }
             }
         }, 0L, 1*20); //repeats every second
-        //Bababooey
+
         if (debug)
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
                 @Override
