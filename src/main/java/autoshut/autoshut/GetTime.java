@@ -6,7 +6,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.time.LocalTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class GetTime implements CommandExecutor {
 
@@ -26,10 +29,17 @@ public class GetTime implements CommandExecutor {
             }
         }
 
+
         return false;
     }
-
-    private LocalTime getTime(){
-        return LocalTime.now();
+    /*
+    Again, instead of using localtime, we can try using date and timezone to
+        make the server time specific to where the server is located (I.e. EST)
+     */
+    private String getTime(){
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone(AutoShut.timezone));
+        return df.format(date);
     }
 }

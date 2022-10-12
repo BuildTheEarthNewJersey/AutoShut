@@ -14,7 +14,9 @@ public final class AutoShut extends JavaPlugin {
     //Data Fields
     private boolean playerAnnouncements;
     private boolean debug;
-    private LocalTime shutdown;
+    public static String timezone;
+    private LocalTime shutdown; //Initialize shutdown variable, which stores the time
+
     private List<String> warningSeconds;
 
     @Override
@@ -28,6 +30,7 @@ public final class AutoShut extends JavaPlugin {
             debug = this.getConfig().getBoolean("debug");
             shutdown = LocalTime.parse(getConfig().getString("shutdown-time"));
             warningSeconds = (List<String>) getConfig().getList("warning-seconds");
+            timezone = this.getConfig().getString("timezone");
         } catch (Exception e){
             e.printStackTrace();
             System.out.println("[AutoShut] A fatal error has occurred in the config! Resetting to default settings and enabling debug mode.");
