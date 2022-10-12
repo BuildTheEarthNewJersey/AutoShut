@@ -14,22 +14,9 @@ public final class AutoShut extends JavaPlugin {
     //Data Fields
     private boolean playerAnnouncements;
     private boolean debug;
-    private LocalTime shutdown;
-    /*
-    Instead of using localTime, we can attempt to use a instantiate using a specific timezone
-        by getting the date, and then setting the time to EST
+    public static String timezone;
+    private LocalTime shutdown; //Initialize shutdown variable, which stores the time
 
-    Pulled from S.O.
-
-        Date date = new Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        // GMT-5
-        df.setTimeZone(TimeZone.getTimeZone("GMT-5:00"));
-        String strDate = df.format(date);
-        System.out.println("Date and time in GMT-5: " + strDate);
-
-    */
     private List<String> warningSeconds;
 
     @Override
@@ -43,6 +30,7 @@ public final class AutoShut extends JavaPlugin {
             debug = this.getConfig().getBoolean("debug");
             shutdown = LocalTime.parse(getConfig().getString("shutdown-time"));
             warningSeconds = (List<String>) getConfig().getList("warning-seconds");
+            timezone = this.getConfig().getString("timezone");
         } catch (Exception e){
             e.printStackTrace();
             System.out.println("[AutoShut] A fatal error has occurred in the config! Resetting to default settings and enabling debug mode.");
