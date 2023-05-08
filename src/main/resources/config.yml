@@ -5,4 +5,4 @@ warning-seconds:
   - "5"
 debug: false
 player-announcements: true
-timezone: "GMT-4:00"
+timezone: "America/New_York"

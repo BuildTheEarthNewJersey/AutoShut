@@ -6,10 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class GetTime implements CommandExecutor {
 
@@ -37,9 +34,6 @@ public class GetTime implements CommandExecutor {
         make the server time specific to where the server is located (I.e. EST)
      */
     private String getTime(){
-        Date date = new Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        df.setTimeZone(TimeZone.getTimeZone(AutoShut.timezone));
-        return df.format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(AutoShut.getCurrentTime().toLocalTime());
     }
 }

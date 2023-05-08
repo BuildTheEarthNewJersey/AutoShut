@@ -1,6 +1,9 @@
 package autoshut.autoshut;
 
+import java.time.Instant;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,11 @@ public final class AutoShut extends JavaPlugin {
     private LocalTime shutdown; //Initialize shutdown variable, which stores the time
 
     private List<String> warningSeconds;
+
+    public static ZonedDateTime getCurrentTime(){
+        ZoneId z = ZoneId.of( timezone);
+        return Instant.now().atZone( z );
+    }
 
     @Override
     public void onEnable() {
@@ -51,10 +59,10 @@ public final class AutoShut extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
             @Override
             public void run() {
-                if (LocalTime.now().getHour() == shutdown.getHour() && LocalTime.now().getMinute() == shutdown.getMinute())
+                if (getCurrentTime().getHour() == shutdown.getHour() && getCurrentTime().getMinute() == shutdown.getMinute())
                     Bukkit.shutdown();
                 for (String key : warningSeconds){
-                    if (((Long) ChronoUnit.SECONDS.between(LocalTime.now(), shutdown)).equals(Long.parseLong(key))) {
+                    if (((Long) ChronoUnit.SECONDS.between(getCurrentTime().toLocalTime(), shutdown)).equals(Long.parseLong(key))) {
                         System.out.println("[AutoShut] Server will be restarting in " + key + " seconds");
                         if (playerAnnouncements) {
                             if (Integer.parseInt(key) > 60)
@@ -72,9 +80,9 @@ public final class AutoShut extends JavaPlugin {
                 @Override
                 public void run(){
                     System.out.println("[AutoShut] DEBUG SCREEN APPEARS EVERY 20 SECONDS");
-                    System.out.println("[AutoShut] DEBUG: Local Time: " + LocalTime.now());
+                    System.out.println("[AutoShut] DEBUG: Local Time: " + getCurrentTime().toLocalTime());
                     System.out.println("[AutoShut] DEBUG: Shutdown Time: " + shutdown);
-                    System.out.println("[AutoShut] DEBUG: Seconds Until Shutdown " + ChronoUnit.SECONDS.between(LocalTime.now(), shutdown));
+                    System.out.println("[AutoShut] DEBUG: Seconds Until Shutdown " + ChronoUnit.SECONDS.between(getCurrentTime().toLocalTime(), shutdown));
                     System.out.println("[AutoShut] DEBUG: Player Announcements: " + playerAnnouncements);
                     System.out.print("[AutoShut] DEBUG: Warning Intervals (Seconds) :");
                     for (String key : warningSeconds)
